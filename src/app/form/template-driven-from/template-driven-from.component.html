@@ -1,4 +1,35 @@
-<div>
-    <input type="text" class="form-control"/>
-<button class="b">Test</button>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div>
+          <div class="form-group">
+            <label for="username">Enter Username</label>
+            <input type="text" id="username" class="form-control" ngModel name="username" required #username="ngModel"/>
+            <div *ngIf="!username.valid && username.touched">
+              <span class="text-danger">Please enter a username</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Enter email</label>
+            <input type="email" id="email" class="form-control" ngModel name="email" email required #email="ngModel"/>
+            <div *ngIf="!email.valid && email.touched">
+              <span class="text-danger">Please enter email</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="secret">Select secret question</label>
+            <select id="secret" class="form-control" ngModel name="secret" required #secret="ngModel">
+              <option>Mother's Name?</option>
+              <option>First Pet's Name?</option>
+            </select>
+            <div *ngIf="!secret.valid && secret.touched">
+              <span class="text-danger">Please select a secret question</span>
+            </div>
+          </div>
+          <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
