@@ -1,3 +1,19 @@
+.container {
+    margin-top: 40px;
+}
+
+.inner {
+    margin-top: 40px;
+}
+
+.outer button {
+    margin: 10px;
+}
+
+.outer {
+    text-align: center;
+}
+
 input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
     border: 2px solid red;
 }

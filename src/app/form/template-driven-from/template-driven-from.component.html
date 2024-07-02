@@ -1,21 +1,31 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <div class="outer col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <button (click)="set(0)" class="btn btn-primary">Reset</button>
+      <button (click)="set(1)" class="btn btn-primary">Set</button>
+      <button (click)="set(2)" class="btn btn-primary">Patch</button>
+    </div>
+    <div class="inner col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <form (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div>
-          <div class="form-group">
-            <label for="username">Enter Username</label>
-            <input type="text" id="username" class="form-control" ngModel name="username" required #username="ngModel"/>
-            <div *ngIf="!username.valid && username.touched">
-              <span class="text-danger">Please enter a username</span>
+          <div ngModelGroup="basicDetails" #basicDetails="ngModelGroup">
+            <div class="form-group">
+              <label for="username">Enter Username</label>
+              <input type="text" id="username" class="form-control" ngModel name="username" required #username="ngModel"/>
+              <div *ngIf="!username.valid && username.touched">
+                <span class="text-danger">Please enter a username</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Enter email</label>
+              <input type="email" id="email" class="form-control" ngModel name="email" email required #email="ngModel"/>
+              <div *ngIf="!email.valid && email.touched">
+                <span class="text-danger">Please enter email</span>
+              </div>
             </div>
           </div>
-          <div class="form-group">
-            <label for="email">Enter email</label>
-            <input type="email" id="email" class="form-control" ngModel name="email" email required #email="ngModel"/>
-            <div *ngIf="!email.valid && email.touched">
-              <span class="text-danger">Please enter email</span>
-            </div>
+          <div *ngIf="!basicDetails.valid && basicDetails.touched">
+            <span class="text-danger">Basic details are not valid</span>
           </div>
           <div class="form-group">
             <label for="secret">Select secret question</label>
@@ -25,6 +35,15 @@
             </select>
             <div *ngIf="!secret.valid && secret.touched">
               <span class="text-danger">Please select a secret question</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="preferredLocation">Select Preferred Location</label>
+            <div class="radio" *ngFor="let preferredLocation of preferredLocations">
+              <label>
+                <input type="radio" name="preferredLocation" [value]="preferredLocation" ngModel/>
+                {{preferredLocation.name}}
+              </label>
             </div>
           </div>
           <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Submit</button>
